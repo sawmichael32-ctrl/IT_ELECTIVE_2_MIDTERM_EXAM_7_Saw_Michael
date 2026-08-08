@@ -56,3 +56,8 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /.idea/
+
+*.csproj.user
+.vs/
+bin/
+obj/

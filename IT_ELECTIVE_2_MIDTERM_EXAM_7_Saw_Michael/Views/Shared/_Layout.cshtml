@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - Gym Attendance System
+    </title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div class="container">
+
+                <a class="navbar-brand"
+                   asp-controller="MemberVisit"
+                   asp-action="Index">
+
+                    Gym Attendance
+
+                </a>
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse"
+                     id="navbarContent">
+
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <ul class="navbar-nav me-auto">
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="MemberVisit"
+                                   asp-action="Index">
+
+                                    Attendance
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="MemberVisit"
+                                   asp-action="Create">
+
+                                    Register Visit
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                        <div class="d-flex align-items-center">
+
+                            <span class="text-white me-3">
+
+                                Hello,
+                                @(User.FindFirst("FullName")?.Value
+                                                            ?? User.Identity?.Name)
+
+                        </span>
+
+                            <form asp-controller="Account"
+                                  asp-action="Logout"
+                                  method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit"
+                                        class="btn btn-outline-light btn-sm">
+
+                                    Logout
+
+                                </button>
+
+                            </form>
+
+                        </div>
+                                        }
+                    else
+                    {
+                        <ul class="navbar-nav ms-auto">
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Account"
+                                   asp-action="Login">
+
+                                    Login
+
+                                </a>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a class="nav-link"
+                                   asp-controller="Account"
+                                   asp-action="Register">
+
+                                    Register
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    }
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main class="container py-4">
+
+        @RenderBody()
+
+    </main>
+
+    <footer class="border-top footer text-muted">
+
+        <div class="container py-3">
+
+            &copy; @DateTime.Now.Year - Gym Attendance System
+
+        </div>
+
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    @await RenderSectionAsync(
+    "Scripts",
+        required: false
+        )
+
+</body>
+</html>

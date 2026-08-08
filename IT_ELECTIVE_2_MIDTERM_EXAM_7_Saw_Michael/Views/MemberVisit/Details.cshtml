@@ -1,0 +1,162 @@
+﻿@model IT_ELECTIVE_2_MIDTERM_EXAM_7_Saw_Michael.Models.MemberVisit
+
+@{
+    ViewData["Title"] = "Visit Details";
+}
+
+<h2 class="mb-4">
+    Member Visit Details
+</h2>
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-dark text-white">
+
+        <h5 class="mb-0">
+            @Model.VisitNumber
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Member ID:</strong>
+
+                <br />
+
+                @Model.MemberId
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Member Name:</strong>
+
+                <br />
+
+                @Model.FirstName @Model.LastName
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Membership Type:</strong>
+
+                <br />
+
+                @Model.MembershipType
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Contact Number:</strong>
+
+                <br />
+
+                @Model.ContactNumber
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Visit Date:</strong>
+
+                <br />
+
+                @Model.VisitDate.ToString("MMMM dd, yyyy")
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Time In:</strong>
+
+                <br />
+
+                @Model.TimeIn.ToString("hh:mm tt")
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Time Out:</strong>
+
+                <br />
+
+                @if (Model.TimeOut.HasValue)
+                {
+                    @Model.TimeOut.Value.ToString("hh:mm tt")
+                }
+                else
+                {
+                    <span>
+                        Not checked out
+                    </span>
+                }
+
+            </div>
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Status:</strong>
+
+                <br />
+
+                @if (Model.Status == "Inside Gym")
+                {
+                    <span class="badge bg-success">
+                        Inside Gym
+                    </span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">
+                        Checked Out
+                    </span>
+                }
+
+            </div>
+
+            <div class="col-md-12 mb-3">
+
+                <strong>Workout Purpose:</strong>
+
+                <br />
+
+                @Model.WorkoutPurpose
+
+            </div>
+
+            <div class="col-md-12 mb-3">
+
+                <strong>Notes:</strong>
+
+                <br />
+
+                @(string.IsNullOrWhiteSpace(Model.Notes)
+                                ? "No notes"
+                                : Model.Notes)
+
+            </div>
+
+        </div>
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+            Back
+        </a>
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn btn-primary">
+            Edit
+        </a>
+
+    </div>
+
+</div>

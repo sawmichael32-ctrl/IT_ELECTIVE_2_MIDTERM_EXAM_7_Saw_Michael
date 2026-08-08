@@ -1,0 +1,214 @@
+﻿@model IT_ELECTIVE_2_MIDTERM_EXAM_7_Saw_Michael.Models.MemberVisit
+
+@{
+    ViewData["Title"] = "Register Member Visit";
+}
+
+<h2 class="mb-4">
+    Register Member Visit
+</h2>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3">
+        </div>
+
+        <form asp-action="Create"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="VisitNumber"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="VisitNumber"
+                           class="form-control"
+                           placeholder="Example: VIS-003" />
+
+                    <span asp-validation-for="VisitNumber"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="MemberId"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="MemberId"
+                           class="form-control"
+                           placeholder="Example: MEM-003" />
+
+                    <span asp-validation-for="MemberId"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="FirstName"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="FirstName"
+                           class="form-control" />
+
+                    <span asp-validation-for="FirstName"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="LastName"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="LastName"
+                           class="form-control" />
+
+                    <span asp-validation-for="LastName"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="MembershipType"
+                           class="form-label">
+                    </label>
+
+                    <select asp-for="MembershipType"
+                            class="form-select">
+
+                        <option value="">
+                            Select Membership
+                        </option>
+
+                        <option value="Regular">
+                            Regular
+                        </option>
+
+                        <option value="Premium">
+                            Premium
+                        </option>
+
+                        <option value="VIP">
+                            VIP
+                        </option>
+
+                    </select>
+
+                    <span asp-validation-for="MembershipType"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="ContactNumber"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="ContactNumber"
+                           class="form-control" />
+
+                    <span asp-validation-for="ContactNumber"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="VisitDate"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="VisitDate"
+                           class="form-control" />
+
+                    <span asp-validation-for="VisitDate"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="TimeIn"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="TimeIn"
+                           class="form-control" />
+
+                    <span asp-validation-for="TimeIn"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label asp-for="WorkoutPurpose"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="WorkoutPurpose"
+                           class="form-control"
+                           placeholder="Example: Cardio" />
+
+                    <span asp-validation-for="WorkoutPurpose"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="col-md-12 mb-3">
+
+                    <label asp-for="Notes"
+                           class="form-label">
+                    </label>
+
+                    <textarea asp-for="Notes"
+                              class="form-control"
+                              rows="4"></textarea>
+
+                    <span asp-validation-for="Notes"
+                          class="text-danger">
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Register Visit
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>

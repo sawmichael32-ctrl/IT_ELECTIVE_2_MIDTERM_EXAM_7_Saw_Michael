@@ -1,0 +1,235 @@
+﻿@model IEnumerable<IT_ELECTIVE_2_MIDTERM_EXAM_7_Saw_Michael.Models.MemberVisit>
+
+@{
+    ViewData["Title"] = "Attendance Monitoring";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2>Gym Attendance Monitoring</h2>
+
+        <p class="text-muted mb-0">
+            Monitor gym member visits and checkout status.
+        </p>
+    </div>
+
+    <a asp-action="Create"
+       class="btn btn-primary">
+        + Register Visit
+    </a>
+
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <form asp-action="Index"
+              method="get"
+              class="row g-2">
+
+            <div class="col-md-10">
+
+                <input type="text"
+                       name="searchString"
+                       value="@ViewBag.SearchString"
+                       class="form-control"
+                       placeholder="Search by visit number, member ID, name, or membership..." />
+
+            </div>
+
+            <div class="col-md-2">
+
+                <button type="submit"
+                        class="btn btn-dark w-100">
+                    Search
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>
+                            Visit Number
+                        </th>
+
+                        <th>
+                            Member
+                        </th>
+
+                        <th>
+                            Membership
+                        </th>
+
+                        <th>
+                            Time In
+                        </th>
+
+                        <th>
+                            Time Out
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @if (!Model.Any())
+                    {
+                        <tr>
+
+                            <td colspan="7"
+                                class="text-center text-muted py-4">
+
+                                No attendance records found.
+
+                            </td>
+
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        @item.VisitNumber
+                                    </strong>
+                                </td>
+
+                                <td>
+
+                                    @item.FirstName @item.LastName
+
+                                    <br />
+
+                                    <small class="text-muted">
+                                        @item.MemberId
+                                    </small>
+
+                                </td>
+
+                                <td>
+                                    @item.MembershipType
+                                </td>
+
+                                <td>
+                                    @item.TimeIn.ToString("hh:mm tt")
+                                </td>
+
+                                <td>
+
+                                    @if (item.TimeOut.HasValue)
+                                    {
+                                        @item.TimeOut.Value.ToString("hh:mm tt")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">
+                                            —
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+
+                                    @if (item.Status == "Inside Gym")
+                                    {
+                                        <span class="badge bg-success">
+                                            Inside Gym
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            Checked Out
+                                        </span>
+                                    }
+
+                                </td>
+
+                                <td>
+
+                                    <div class="btn-group">
+
+                                        <a asp-action="Details"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-info">
+                                            Details
+                                        </a>
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Edit
+                                        </a>
+
+                                        @if (item.Status == "Inside Gym")
+                                        {
+                                            <a asp-action="CheckOut"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-sm btn-outline-danger">
+                                                Checkout
+                                            </a>
+                                        }
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

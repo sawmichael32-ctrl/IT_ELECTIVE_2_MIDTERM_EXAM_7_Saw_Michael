@@ -1,0 +1,103 @@
+﻿@model IT_ELECTIVE_2_MIDTERM_EXAM_7_Saw_Michael.Models.MemberVisit
+
+@{
+    ViewData["Title"] = "Record Checkout";
+}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-6">
+
+        <div class="card shadow mt-4">
+
+            <div class="card-header bg-danger text-white">
+
+                <h4 class="mb-0">
+                    Record Member Checkout
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <p>
+                    Are you sure you want to record the checkout
+                    for this member?
+                </p>
+
+                <div class="border rounded p-3 mb-4">
+
+                    <p class="mb-1">
+
+                        <strong>
+                            Visit Number:
+                        </strong>
+
+                        @Model.VisitNumber
+
+                    </p>
+
+                    <p class="mb-1">
+
+                        <strong>
+                            Member:
+                        </strong>
+
+                        @Model.FirstName @Model.LastName
+
+                    </p>
+
+                    <p class="mb-1">
+
+                        <strong>
+                            Membership:
+                        </strong>
+
+                        @Model.MembershipType
+
+                    </p>
+
+                    <p class="mb-0">
+
+                        <strong>
+                            Time In:
+                        </strong>
+
+                        @Model.TimeIn.ToString("hh:mm tt")
+
+                    </p>
+
+                </div>
+
+                <form asp-action="CheckOutConfirmed"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden"
+                           name="id"
+                           value="@Model.Id" />
+
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        Confirm Checkout
+
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

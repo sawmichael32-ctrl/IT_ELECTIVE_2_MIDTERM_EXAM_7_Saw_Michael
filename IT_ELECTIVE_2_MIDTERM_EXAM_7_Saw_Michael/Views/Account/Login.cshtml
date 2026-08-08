@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-5">
+
+        <div class="card shadow mt-5">
+
+            <div class="card-header bg-dark text-white text-center">
+                <h3 class="mb-0">Gym Attendance System</h3>
+            </div>
+
+            <div class="card-body">
+
+                <h4 class="text-center mb-4">
+                    Login
+                </h4>
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["SuccessMessage"]
+                    </div>
+                }
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3">
+                </div>
+
+                <form asp-action="Login" method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <input name="username"
+                               class="form-control"
+                               placeholder="Enter username"
+                               required />
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <input name="password"
+                               type="password"
+                               class="form-control"
+                               placeholder="Enter password"
+                               required />
+
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-dark w-100">
+                        Login
+                    </button>
+
+                </form>
+
+                <div class="text-center mt-3">
+
+                    <span>
+                        Don't have an account?
+                    </span>
+
+                    <a asp-controller="Account"
+                       asp-action="Register">
+                        Register
+                    </a>
+
+                </div>
+
+                <div class="alert alert-info mt-4">
+
+                    <strong>Demo Account</strong>
+                    <br />
+
+                    Username: admin
+                    <br />
+
+                    Password: admin123
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
